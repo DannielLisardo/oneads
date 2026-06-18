@@ -170,6 +170,19 @@ nav.scrolled{background:rgba(6,9,16,.9);backdrop-filter:blur(20px);border-bottom
 .step h4{font-size:.92rem;font-weight:700;margin-bottom:8px}
 .step p{font-size:.8rem;color:var(--text2);line-height:1.6}
 
+/* SPECIALIST SECTION */
+.specialist-section{padding:110px 0;background:var(--bg2);position:relative;overflow:hidden}
+.specialist-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:var(--accent3);filter:blur(160px);opacity:.05;top:50%;right:-100px;transform:translateY(-50%);pointer-events:none}
+.specialist-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;position:relative;z-index:1}
+.specialist-text h2{font-size:clamp(1.9rem,3.5vw,2.6rem);font-weight:900;letter-spacing:-1px;margin:20px 0 20px;line-height:1.1}
+.specialist-text p{color:var(--text2);line-height:1.85;font-size:.95rem;margin-bottom:16px}
+.specialist-cards{display:flex;flex-direction:column;gap:14px}
+.spec-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:22px 24px;display:flex;align-items:flex-start;gap:16px;transition:border-color .2s,transform .2s}
+.spec-card:hover{border-color:var(--accent3);transform:translateX(4px)}
+.spec-icon{width:42px;height:42px;border-radius:10px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.spec-body h4{font-size:.92rem;font-weight:800;margin-bottom:5px}
+.spec-body p{font-size:.82rem;color:var(--text2);line-height:1.6}
+
 /* FINAL CTA */
 .final-cta{padding:120px 0;position:relative;overflow:hidden;text-align:center}
 .final-glow-1{position:absolute;width:700px;height:700px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));filter:blur(180px);opacity:.07;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
@@ -188,7 +201,7 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
 
 /* RESPONSIVE */
 @media(max-width:900px){
-  .cross-grid,.insights-inner,.security-grid{grid-template-columns:1fr}
+  .cross-grid,.insights-inner,.security-grid,.specialist-inner{grid-template-columns:1fr}
   .steps{grid-template-columns:repeat(2,1fr)}
   .steps::before{display:none}
   .roas-platforms{grid-template-columns:repeat(2,1fr)}
@@ -261,6 +274,8 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
       <div class="plat-badge"><span class="plat-icon">📘</span> Meta Ads</div>
       <span class="plat-plus">+</span>
       <div class="plat-badge"><span class="plat-icon">🔵</span> Google Ads</div>
+      <span class="plat-plus">+</span>
+      <div class="plat-badge"><span class="plat-icon">🎵</span> TikTok Ads</div>
       <span class="plat-plus">+</span>
       <div class="plat-badge"><span class="plat-icon">🔥</span> Hotmart</div>
       <span class="plat-plus">+</span>
@@ -512,6 +527,51 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
         <div class="step-num">4</div>
         <h4>Insights acionáveis</h4>
         <p>O sistema analisa e entrega o que fazer. Você executa. Nada de ficar interpretando dado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALIST SECTION -->
+<section class="specialist-section">
+  <div class="specialist-glow"></div>
+  <div class="container">
+    <div class="specialist-inner">
+      <div class="specialist-text fade-in">
+        <span class="tag tag-gold">Nossa diferença</span>
+        <h2>Não somos uma ferramenta.<br /><span class="gradient-text">Somos especialistas<br />no seu negócio.</span></h2>
+        <p>Com o tempo, conhecemos seus produtos, suas campanhas, sua sazonalidade e seus benchmarks. Cada análise é baseada no histórico real do seu negócio — não em médias de mercado genéricas.</p>
+        <p>Enquanto a tecnologia coleta e organiza os dados automaticamente, o time humano interpreta, contextualiza e transforma números em estratégia. Você nunca fica sozinho diante de um dashboard.</p>
+      </div>
+      <div class="specialist-cards fade-in">
+        <div class="spec-card">
+          <div class="spec-icon">🧠</div>
+          <div class="spec-body">
+            <h4>Conhecemos sua operação de dentro</h4>
+            <p>Após as primeiras semanas, sabemos quais campanhas têm melhor histórico, quais produtos convertem mais e onde estão os seus gargalos recorrentes.</p>
+          </div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-icon">📐</div>
+          <div class="spec-body">
+            <h4>Benchmarks personalizados — não genéricos</h4>
+            <p>Seu ROAS mínimo, seu CPL ideal, seu ticket médio histórico. Todos os alertas e análises são calibrados com base nos seus próprios números, não em médias do setor.</p>
+          </div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-icon">🤝</div>
+          <div class="spec-body">
+            <h4>Uma extensão do seu time</h4>
+            <p>Não entregamos relatório e sumimos. Estamos nas decisões de budget, nos lançamentos, nas correções de rota — como um sócio estratégico que domina os seus dados.</p>
+          </div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-icon">📈</div>
+          <div class="spec-body">
+            <h4>Visão que acumula com o tempo</h4>
+            <p>Quanto mais tempo juntos, mais precisa fica a análise. O histórico acumulado no seu Drive vira um ativo estratégico que cresce a cada mês.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
