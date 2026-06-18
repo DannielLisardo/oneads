@@ -1,0 +1,162 @@
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface2: #22263a;
+  --border: #2e3347;
+  --accent: #6c63ff;
+  --accent2: #48d1cc;
+  --text: #e8eaf6;
+  --text2: #9098b8;
+  --success: #4caf50;
+  --warning: #ff9800;
+  --danger: #f44336;
+  --google: #4285f4;
+  --meta: #1877f2;
+  --tiktok: #010101;
+  --hotmart: #f04e23;
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── Layout ── */
+.navbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 32px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+}
+.navbar .logo { font-size: 1.4rem; font-weight: 700; color: var(--accent); letter-spacing: -0.5px; }
+.navbar .logo span { color: var(--accent2); }
+.container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+/* ── Header ── */
+.page-header { margin-bottom: 40px; }
+.page-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+.page-header p { color: var(--text2); font-size: 1rem; }
+
+/* ── Cards de plataforma ── */
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 48px;
+}
+.platform-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.platform-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.platform-card.connected { border-color: var(--success); }
+
+.platform-icon {
+  width: 48px; height: 48px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; margin-bottom: 16px;
+}
+.icon-google { background: rgba(66,133,244,0.15); }
+.icon-meta   { background: rgba(24,119,242,0.15); }
+.icon-tiktok { background: rgba(254,44,85,0.15); }
+.icon-hotmart{ background: rgba(240,78,35,0.15); }
+
+.platform-name { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+.platform-desc { color: var(--text2); font-size: 0.82rem; margin-bottom: 16px; }
+.platform-account { font-size: 0.8rem; color: var(--accent2); margin-bottom: 12px; min-height: 18px; }
+
+/* ── Botões ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 8px;
+  font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; border: none; transition: all 0.15s;
+  text-decoration: none; white-space: nowrap;
+}
+.btn-primary { background: var(--accent); color: #fff; width: 100%; justify-content: center; }
+.btn-primary:hover { background: #5753e8; }
+.btn-danger  { background: rgba(244,67,54,0.15); color: var(--danger); border: 1px solid var(--danger); width: 100%; justify-content: center; }
+.btn-danger:hover { background: rgba(244,67,54,0.25); }
+.btn-success { background: rgba(76,175,80,0.15); color: var(--success); border: 1px solid var(--success); }
+.btn-sync    { background: var(--surface2); color: var(--text); border: 1px solid var(--border); width: 100%; justify-content: center; margin-top: 8px; }
+.btn-sync:hover { border-color: var(--accent); color: var(--accent); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.status-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+}
+.badge-connected { background: rgba(76,175,80,0.15); color: var(--success); }
+.badge-disconnected { background: rgba(144,152,184,0.1); color: var(--text2); }
+
+/* ── Seção Sincronização ── */
+.section-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+.sync-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 48px; }
+.sync-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.sync-actions .btn { flex: 1; min-width: 160px; }
+
+/* ── Log de sincronização ── */
+.sync-log {
+  margin-top: 20px; background: var(--surface2); border-radius: 8px;
+  padding: 16px; font-family: 'Courier New', monospace; font-size: 0.82rem;
+  max-height: 200px; overflow-y: auto; display: none;
+}
+.sync-log.visible { display: block; }
+.log-line { padding: 2px 0; }
+.log-ok  { color: var(--success); }
+.log-err { color: var(--danger); }
+.log-info{ color: var(--accent2); }
+
+/* ── Arquivos no Drive ── */
+.files-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.file-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px;
+  display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit;
+  transition: border-color 0.2s;
+}
+.file-card:hover { border-color: var(--accent); }
+.file-icon { font-size: 2rem; }
+.file-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
+.file-date { color: var(--text2); font-size: 0.78rem; }
+
+/* ── Toast ── */
+.toast-container { position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 999; }
+.toast {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 18px; min-width: 260px; max-width: 360px;
+  box-shadow: var(--shadow); display: flex; align-items: center; gap: 10px;
+  animation: slideIn 0.25s ease;
+}
+.toast.ok   { border-color: var(--success); }
+.toast.err  { border-color: var(--danger); }
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+/* ── Spinner ── */
+.spinner {
+  display: inline-block; width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
+  border-radius: 50%; animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Loading overlay ── */
+.loading-overlay {
+  position: fixed; inset: 0; background: rgba(15,17,23,0.85);
+  display: none; align-items: center; justify-content: center;
+  flex-direction: column; gap: 16px; z-index: 200;
+}
+.loading-overlay.active { display: flex; }
+.loading-overlay .spinner { width: 40px; height: 40px; border-width: 4px; }
+.loading-overlay p { color: var(--text2); }

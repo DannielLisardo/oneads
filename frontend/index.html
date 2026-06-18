@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneAds — Conecte suas plataformas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="logo">One<span>Ads</span></div>
+  <div style="color:var(--text2);font-size:0.85rem">Gestão Inteligente de Tráfego Pago</div>
+</nav>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loading-overlay">
+  <div class="spinner"></div>
+  <p id="loading-text">Aguarde...</p>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- Main -->
+<main class="container">
+
+  <div class="page-header">
+    <h1>Central de Conexões</h1>
+    <p>Conecte suas plataformas de ads. Os dados serão salvos no <strong>seu Google Drive</strong> como banco de dados.</p>
+  </div>
+
+  <!-- Plataformas -->
+  <div class="section-title">Plataformas</div>
+  <div class="platforms-grid" id="platforms-grid">
+    <!-- renderizado via JS -->
+  </div>
+
+  <!-- Sincronização -->
+  <div class="section-title">Sincronizar Dados</div>
+  <div class="sync-panel">
+    <p style="color:var(--text2);margin-bottom:16px;font-size:0.9rem">
+      Puxe os dados das plataformas conectadas e salve automaticamente nas planilhas do seu Drive.
+    </p>
+    <div class="sync-actions" id="sync-actions">
+      <!-- renderizado via JS -->
+    </div>
+    <div class="sync-log" id="sync-log"></div>
+  </div>
+
+  <!-- Arquivos no Drive -->
+  <div class="section-title">Planilhas no Seu Drive</div>
+  <div id="drive-files" class="files-grid">
+    <p style="color:var(--text2)">Conecte o Google Drive para ver as planilhas.</p>
+  </div>
+
+</main>
+
+<script src="js/app.js"></script>
+</body>
+</html>

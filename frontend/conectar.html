@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OneAds — Conectar suas contas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060910;
+  --surface:#0f1522;
+  --surface2:#141c2e;
+  --border:#1a2438;
+  --border2:#243350;
+  --accent:#7c6df5;
+  --accent2:#06d6a0;
+  --text:#eef0f8;
+  --text2:#8892b0;
+  --text3:#4a5568;
+  --radius:16px;
+  --radius-sm:10px;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;line-height:1.6}
+.logo{font-size:1.5rem;font-weight:900;margin-bottom:8px}
+.logo span{color:var(--accent2)}
+.subtitle{font-size:.9rem;color:var(--text2);margin-bottom:48px;text-align:center}
+
+.connect-box{width:100%;max-width:520px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:40px}
+.connect-box h2{font-size:1.3rem;font-weight:800;margin-bottom:8px}
+.connect-box p{font-size:.88rem;color:var(--text2);margin-bottom:32px;line-height:1.7}
+
+.platform-btn{width:100%;display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--border);cursor:pointer;transition:all .2s;margin-bottom:12px;text-align:left}
+.platform-btn:hover{border-color:var(--accent2);transform:translateX(4px)}
+.platform-btn.connected{border-color:var(--accent2);background:rgba(6,214,160,.06)}
+.platform-btn.connected .pb-status{color:var(--accent2)}
+.pb-icon{font-size:1.6rem;flex-shrink:0}
+.pb-info{flex:1}
+.pb-name{font-size:.95rem;font-weight:700}
+.pb-desc{font-size:.78rem;color:var(--text2);margin-top:2px}
+.pb-status{font-size:.78rem;font-weight:600;color:var(--text3);flex-shrink:0}
+
+/* Google Drive destaque */
+.platform-btn.priority{border-color:rgba(124,109,245,.4);background:rgba(124,109,245,.05)}
+.platform-btn.priority:hover{border-color:var(--accent)}
+
+.note{font-size:.78rem;color:var(--text3);text-align:center;margin-top:24px;line-height:1.7}
+.note a{color:var(--accent2);text-decoration:underline}
+
+.shopify-form{display:none;margin-top:-4px;margin-bottom:12px;padding:14px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm)}
+.shopify-form label{font-size:.78rem;color:var(--text2);display:block;margin-bottom:6px;font-weight:600}
+.shopify-form input{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:9px 12px;color:var(--text);font-size:.88rem;font-family:inherit;outline:none}
+.shopify-form input:focus{border-color:var(--accent2)}
+.shopify-form button{margin-top:10px;width:100%;padding:10px;background:linear-gradient(135deg,var(--accent),#5b4fdc);color:#fff;border:none;border-radius:6px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:inherit}
+.shopify-form button:hover{opacity:.9}
+
+.divider{height:1px;background:var(--border);margin:20px 0}
+
+.security-note{display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(6,214,160,.05);border:1px solid rgba(6,214,160,.15);border-radius:var(--radius-sm);font-size:.8rem;color:var(--text2);line-height:1.5}
+.security-icon{font-size:1.2rem;flex-shrink:0}
+
+/* Toast */
+.toast{position:fixed;top:24px;right:24px;z-index:9999;background:var(--accent2);color:#060910;padding:14px 22px;border-radius:10px;font-weight:700;font-size:.9rem;box-shadow:0 8px 32px rgba(6,214,160,.4);opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<div class="logo">One<span>Ads</span></div>
+<p class="subtitle">Conecte suas plataformas de anúncios em minutos</p>
+
+<div class="connect-box">
+  <h2>Conectar suas contas</h2>
+  <p>Cada conexão usa OAuth — você autoriza diretamente na plataforma. Nenhuma senha é armazenada. Seus dados vão para o seu Google Drive.</p>
+
+  <!-- Google Drive (prioritário) -->
+  <div class="platform-btn priority" id="btn-google" onclick="connect('google')">
+    <span class="pb-icon">📊</span>
+    <div class="pb-info">
+      <div class="pb-name">Google Drive</div>
+      <div class="pb-desc">Necessário primeiro — é onde seus dados serão salvos</div>
+    </div>
+    <span class="pb-status" id="status-google">Conectar →</span>
+  </div>
+
+  <!-- Meta Ads -->
+  <div class="platform-btn" id="btn-meta" onclick="connect('meta')">
+    <span class="pb-icon">📘</span>
+    <div class="pb-info">
+      <div class="pb-name">Meta Ads</div>
+      <div class="pb-desc">Facebook + Instagram Ads · Campanhas e ROAS</div>
+    </div>
+    <span class="pb-status" id="status-meta">Conectar →</span>
+  </div>
+
+  <!-- Google Ads -->
+  <div class="platform-btn" id="btn-google-ads" onclick="connect('google-ads')">
+    <span class="pb-icon">🔵</span>
+    <div class="pb-info">
+      <div class="pb-name">Google Ads</div>
+      <div class="pb-desc">Usa o mesmo login do Google Drive</div>
+    </div>
+    <span class="pb-status" id="status-google-ads">Conectar →</span>
+  </div>
+
+  <!-- Hotmart -->
+  <div class="platform-btn" id="btn-hotmart" onclick="connect('hotmart')">
+    <span class="pb-icon">🔥</span>
+    <div class="pb-info">
+      <div class="pb-name">Hotmart</div>
+      <div class="pb-desc">Vendas, conversões e produtos digitais</div>
+    </div>
+    <span class="pb-status" id="status-hotmart">Conectar →</span>
+  </div>
+
+  <!-- Shopify -->
+  <div class="platform-btn" id="btn-shopify" onclick="toggleShopifyForm()">
+    <span class="pb-icon">🛍️</span>
+    <div class="pb-info">
+      <div class="pb-name">Shopify</div>
+      <div class="pb-desc">Pedidos e receita da sua loja</div>
+    </div>
+    <span class="pb-status" id="status-shopify">Conectar →</span>
+  </div>
+  <div class="shopify-form" id="shopify-form">
+    <label>Domínio da sua loja Shopify</label>
+    <input type="text" id="shopify-domain" placeholder="minha-loja.myshopify.com" />
+    <button onclick="connectShopify()">Conectar Shopify →</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="security-note">
+    <span class="security-icon">🔐</span>
+    <span>Todos os acessos são <strong>somente leitura</strong>. Seus dados vão direto para o seu Google Drive — nenhuma credencial fica armazenada em nossos servidores.</span>
+  </div>
+
+  <p class="note" style="margin-top:20px">Dúvidas? Fale pelo <a href="https://wa.me/5511985247274" target="_blank">WhatsApp (11) 98524-7274</a></p>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const BACKEND = 'http://localhost:8000';
+
+const platformNames = {
+  google: 'Google Drive',
+  meta: 'Meta Ads',
+  hotmart: 'Hotmart',
+  shopify: 'Shopify',
+  tiktok: 'TikTok Ads',
+};
+
+function connect(platform) {
+  if (platform === 'google-ads') {
+    showToast('Google Ads usa o login do Google Drive. Conecte o Google Drive primeiro.');
+    return;
+  }
+  window.location.href = `${BACKEND}/auth/${platform}/connect`;
+}
+
+function toggleShopifyForm() {
+  const form = document.getElementById('shopify-form');
+  form.style.display = form.style.display === 'block' ? 'none' : 'block';
+  if (form.style.display === 'block') document.getElementById('shopify-domain').focus();
+}
+
+function connectShopify() {
+  const domain = document.getElementById('shopify-domain').value.trim();
+  if (!domain) { showToast('Digite o domínio da sua loja.'); return; }
+  const shop = domain.includes('.myshopify.com') ? domain : domain + '.myshopify.com';
+  window.location.href = `${BACKEND}/auth/shopify/connect?shop=${shop}`;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+// Verifica parâmetro ?connected=
+const params = new URLSearchParams(window.location.search);
+const connected = params.get('connected');
+if (connected) {
+  const name = platformNames[connected] || connected;
+  showToast('✅ ' + name + ' conectado com sucesso!');
+  const btn = document.getElementById('btn-' + connected);
+  const status = document.getElementById('status-' + connected);
+  if (btn) { btn.classList.add('connected'); }
+  if (status) { status.textContent = '✅ Conectado'; }
+  history.replaceState({}, '', '/conectar');
+}
+
+// Verifica status das conexões ao carregar
+async function checkStatus() {
+  try {
+    const res = await fetch(`${BACKEND}/auth/status`);
+    const data = await res.json();
+    for (const [platform, info] of Object.entries(data)) {
+      if (info.connected) {
+        const btn = document.getElementById('btn-' + platform);
+        const status = document.getElementById('status-' + platform);
+        if (btn) btn.classList.add('connected');
+        if (status) status.textContent = info.account_name ? '✅ ' + info.account_name : '✅ Conectado';
+      }
+    }
+  } catch(e) {}
+}
+checkStatus();
+</script>
+</body>
+</html>

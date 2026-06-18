@@ -1,0 +1,16 @@
+# Credenciais — NUNCA versionar
+.env
+tokens.json
+backend/tokens.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+*.egg-info/
+
+# Sistema
+.DS_Store
+Thumbs.db
