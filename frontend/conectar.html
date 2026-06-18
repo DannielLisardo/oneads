@@ -3,389 +3,104 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>OneAds — Conectar Plataformas</title>
+<title>OneAds - Conectar Plataformas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#060910;
-  --surface:#0d1420;
-  --surface2:#111827;
-  --border:#1a2438;
-  --border2:#1f2d47;
-  --accent:#7c6df5;
-  --accent-glow:rgba(124,109,245,.15);
-  --green:#06d6a0;
-  --green-glow:rgba(6,214,160,.12);
-  --red:#ff6b6b;
-  --text:#eef0f8;
-  --text2:#8892b0;
-  --text3:#4a5568;
-  --radius:18px;
-  --radius-sm:12px;
+  --bg:#060910;--surface:#0d1420;--surface2:#111827;
+  --border:#1a2438;--border2:#1f2d47;
+  --accent:#7c6df5;--green:#06d6a0;--green-glow:rgba(6,214,160,.12);
+  --red:#ff6b6b;--text:#eef0f8;--text2:#8892b0;--text3:#4a5568;
+  --radius:18px;--radius-sm:12px;
 }
-body{
-  font-family:'Inter',system-ui,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  padding:40px 20px 80px;
-  line-height:1.6;
-}
-
-/* ── Header ── */
-.header{
-  text-align:center;
-  margin-bottom:56px;
-}
-.logo{
-  font-size:1.6rem;
-  font-weight:900;
-  letter-spacing:-0.5px;
-  margin-bottom:6px;
-}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:40px 20px 80px;line-height:1.6}
+.header{text-align:center;margin-bottom:48px}
+.logo{font-size:1.6rem;font-weight:900;letter-spacing:-.5px;margin-bottom:6px}
 .logo span{color:var(--green)}
-.header-sub{
-  font-size:.9rem;
-  color:var(--text2);
-}
-
-/* ── Layout ── */
-.container{
-  max-width:580px;
-  margin:0 auto;
-}
-
-/* ── Step label ── */
-.step-label{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:14px;
-}
-.step-num{
-  width:26px;height:26px;
-  border-radius:50%;
-  background:var(--accent);
-  color:#fff;
-  font-size:.75rem;
-  font-weight:800;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.step-title{
-  font-size:.8rem;
-  font-weight:700;
-  color:var(--text2);
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
-
-/* ── Card ── */
-.card{
-  background:var(--surface);
-  border:1px solid var(--border2);
-  border-radius:var(--radius);
-  padding:20px;
-  margin-bottom:10px;
-  transition:border-color .2s,background .2s;
-}
-.card.required{
-  border-color:rgba(124,109,245,.35);
-  background:rgba(124,109,245,.04);
-}
-.card.connected{
-  border-color:rgba(6,214,160,.4);
-  background:var(--green-glow);
-}
-.card.soon{
-  opacity:.5;
-  pointer-events:none;
-}
-
-/* ── Card inner ── */
-.card-main{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-.card-icon{
-  font-size:2rem;
-  flex-shrink:0;
-  width:48px;
-  text-align:center;
-}
-.card-body{
-  flex:1;
-  min-width:0;
-}
-.card-name{
-  font-size:1rem;
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  flex-wrap:wrap;
-}
-.badge{
-  font-size:.65rem;
-  font-weight:700;
-  padding:3px 8px;
-  border-radius:20px;
-  text-transform:uppercase;
-  letter-spacing:.06em;
-}
+.header-sub{font-size:.9rem;color:var(--text2)}
+.container{max-width:560px;margin:0 auto}
+.step-label{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-title{font-size:.78rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.08em}
+.card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:20px;margin-bottom:10px;transition:border-color .2s,background .2s}
+.card.required{border-color:rgba(124,109,245,.35);background:rgba(124,109,245,.04)}
+.card.connected{border-color:rgba(6,214,160,.4);background:var(--green-glow)}
+.card.soon{opacity:.45;pointer-events:none}
+.card-main{display:flex;align-items:center;gap:14px}
+.card-icon{font-size:1.8rem;flex-shrink:0;width:44px;text-align:center}
+.card-body{flex:1;min-width:0}
+.card-name{font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.badge{font-size:.62rem;font-weight:700;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em}
 .badge-required{background:rgba(124,109,245,.2);color:var(--accent)}
 .badge-soon{background:rgba(255,255,255,.07);color:var(--text3)}
-.card-desc{
-  font-size:.8rem;
-  color:var(--text2);
-  margin-top:3px;
-}
-.card-account{
-  font-size:.8rem;
-  color:var(--green);
-  font-weight:600;
-  margin-top:3px;
-  display:none;
-}
+.card-desc{font-size:.78rem;color:var(--text2);margin-top:3px}
+.card-account{font-size:.78rem;color:var(--green);font-weight:600;margin-top:3px;display:none}
 .card-account.show{display:block}
-
-/* ── Buttons ── */
-.card-actions{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  flex-shrink:0;
-}
-.btn-connect{
-  padding:9px 20px;
-  background:linear-gradient(135deg,var(--accent),#5b4fdc);
-  color:#fff;
-  border:none;
-  border-radius:var(--radius-sm);
-  font-size:.82rem;
-  font-weight:700;
-  cursor:pointer;
-  font-family:inherit;
-  transition:opacity .2s,transform .1s;
-  white-space:nowrap;
-}
+.card-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.btn-connect{padding:9px 18px;background:linear-gradient(135deg,var(--accent),#5b4fdc);color:#fff;border:none;border-radius:var(--radius-sm);font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .2s,transform .1s;white-space:nowrap}
 .btn-connect:hover{opacity:.85;transform:translateY(-1px)}
-.btn-connect:active{transform:translateY(0)}
-.btn-connect:disabled{opacity:.4;cursor:not-allowed;transform:none}
-
-.btn-disconnect{
-  padding:7px 14px;
-  background:transparent;
-  color:var(--text3);
-  border:1px solid var(--border2);
-  border-radius:var(--radius-sm);
-  font-size:.75rem;
-  font-weight:600;
-  cursor:pointer;
-  font-family:inherit;
-  transition:border-color .2s,color .2s;
-  white-space:nowrap;
-}
+.btn-connect:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.btn-disconnect{padding:7px 12px;background:transparent;color:var(--text3);border:1px solid var(--border2);border-radius:var(--radius-sm);font-size:.73rem;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .2s,color .2s;white-space:nowrap}
 .btn-disconnect:hover{border-color:var(--red);color:var(--red)}
-
-.btn-label-soon{
-  font-size:.78rem;
-  color:var(--text3);
-  font-weight:600;
-}
-
-/* Checkmark */
-.check-icon{
-  font-size:1.3rem;
-  display:none;
-}
+.check-icon{font-size:1.2rem;display:none}
 .connected .check-icon{display:inline}
-
-/* ── Shopify domain form ── */
-.shopify-expand{
-  display:none;
-  margin-top:16px;
-  padding-top:16px;
-  border-top:1px solid var(--border);
-}
-.shopify-expand label{
-  font-size:.78rem;
-  color:var(--text2);
-  font-weight:600;
-  display:block;
-  margin-bottom:6px;
-}
-.shopify-row{
-  display:flex;
-  gap:8px;
-}
-.shopify-expand input{
-  flex:1;
-  background:var(--bg);
-  border:1px solid var(--border2);
-  border-radius:8px;
-  padding:9px 12px;
-  color:var(--text);
-  font-size:.85rem;
-  font-family:inherit;
-  outline:none;
-  transition:border-color .2s;
-}
+.soon-label{font-size:.75rem;color:var(--text3);font-weight:600}
+.shopify-expand{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.shopify-expand label{font-size:.75rem;color:var(--text2);font-weight:600;display:block;margin-bottom:6px}
+.shopify-row{display:flex;gap:8px}
+.shopify-expand input{flex:1;background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.83rem;font-family:inherit;outline:none;transition:border-color .2s}
 .shopify-expand input:focus{border-color:var(--accent)}
 .shopify-expand input::placeholder{color:var(--text3)}
-.shopify-expand .btn-connect{padding:9px 16px;font-size:.8rem}
-
-/* ── Divider ── */
-.section-gap{margin-bottom:40px}
-
-/* ── Footer ── */
-.footer-box{
-  margin-top:40px;
-  padding:18px 20px;
-  background:rgba(6,214,160,.05);
-  border:1px solid rgba(6,214,160,.15);
-  border-radius:var(--radius-sm);
-  display:flex;
-  gap:12px;
-  align-items:flex-start;
-}
-.footer-icon{font-size:1.2rem;flex-shrink:0;margin-top:2px}
-.footer-text{font-size:.8rem;color:var(--text2);line-height:1.7}
+.section-gap{margin-bottom:36px}
+.footer-box{margin-top:28px;padding:16px 18px;background:rgba(6,214,160,.05);border:1px solid rgba(6,214,160,.15);border-radius:var(--radius-sm);display:flex;gap:12px;align-items:flex-start}
+.footer-icon{font-size:1.1rem;flex-shrink:0;margin-top:2px}
+.footer-text{font-size:.78rem;color:var(--text2);line-height:1.7}
 .footer-text strong{color:var(--text)}
-
-.wa-link{
-  display:block;
-  text-align:center;
-  margin-top:24px;
-  font-size:.82rem;
-  color:var(--text3);
-}
+.wa-link{display:block;text-align:center;margin-top:20px;font-size:.8rem;color:var(--text3)}
 .wa-link a{color:var(--green);text-decoration:none;font-weight:600}
 .wa-link a:hover{text-decoration:underline}
-
-/* ── Progress bar ── */
-.progress-bar{
-  display:flex;
-  gap:8px;
-  margin-bottom:48px;
-}
-.progress-step{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-.progress-track{
-  height:4px;
-  background:var(--border2);
-  border-radius:2px;
-  overflow:hidden;
-}
-.progress-fill{
-  height:100%;
-  background:linear-gradient(90deg,var(--accent),var(--green));
-  border-radius:2px;
-  width:0;
-  transition:width .5s ease;
-}
-.progress-label{
-  font-size:.7rem;
-  color:var(--text3);
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:.06em;
-}
+.progress-bar{display:flex;gap:8px;margin-bottom:44px}
+.progress-step{flex:1;display:flex;flex-direction:column;gap:5px}
+.progress-track{height:4px;background:var(--border2);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:2px;width:0;transition:width .5s ease}
+.progress-label{font-size:.67rem;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 .progress-step.active .progress-label{color:var(--text2)}
 .progress-step.done .progress-fill{width:100%}
 .progress-step.active .progress-fill{width:50%}
-
-/* ── Toast ── */
-.toast{
-  position:fixed;
-  bottom:28px;
-  left:50%;
-  transform:translateX(-50%) translateY(20px);
-  z-index:9999;
-  padding:13px 24px;
-  border-radius:12px;
-  font-weight:700;
-  font-size:.88rem;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .3s,transform .3s;
-  white-space:nowrap;
-  max-width:90vw;
-}
-.toast.success{
-  background:var(--green);
-  color:#060910;
-  box-shadow:0 8px 32px rgba(6,214,160,.35);
-}
-.toast.info{
-  background:var(--surface2);
-  color:var(--text);
-  border:1px solid var(--border2);
-  box-shadow:0 8px 32px rgba(0,0,0,.4);
-}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);z-index:9999;padding:12px 22px;border-radius:12px;font-weight:700;font-size:.85rem;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap;max-width:90vw}
+.toast.success{background:var(--green);color:#060910;box-shadow:0 8px 32px rgba(6,214,160,.35)}
+.toast.info{background:var(--surface2);color:var(--text);border:1px solid var(--border2);box-shadow:0 8px 32px rgba(0,0,0,.4)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* ── Responsive ── */
-@media(max-width:480px){
-  .card-actions{flex-direction:column;align-items:stretch}
-  .btn-connect,.btn-disconnect{width:100%;text-align:center}
-  .shopify-row{flex-direction:column}
-}
+@media(max-width:480px){.card-actions{flex-direction:column;align-items:stretch}.btn-connect,.btn-disconnect{width:100%;text-align:center}.shopify-row{flex-direction:column}}
 </style>
 </head>
 <body>
-
 <div class="header">
   <div class="logo">One<span>Ads</span></div>
-  <p class="header-sub">Configure suas integrações em minutos</p>
+  <p class="header-sub">Configure suas integracoes em minutos</p>
 </div>
-
 <div class="container">
-
-  <!-- Progress -->
   <div class="progress-bar">
-    <div class="progress-step" id="prog-step-1">
-      <div class="progress-track"><div class="progress-fill"></div></div>
-      <div class="progress-label">1. Destino</div>
-    </div>
-    <div class="progress-step" id="prog-step-2">
-      <div class="progress-track"><div class="progress-fill"></div></div>
-      <div class="progress-label">2. Plataformas</div>
-    </div>
-    <div class="progress-step" id="prog-step-3">
-      <div class="progress-track"><div class="progress-fill"></div></div>
-      <div class="progress-label">3. Pronto</div>
-    </div>
+    <div class="progress-step" id="prog-1"><div class="progress-track"><div class="progress-fill"></div></div><div class="progress-label">1. Destino</div></div>
+    <div class="progress-step" id="prog-2"><div class="progress-track"><div class="progress-fill"></div></div><div class="progress-label">2. Plataformas</div></div>
+    <div class="progress-step" id="prog-3"><div class="progress-track"><div class="progress-fill"></div></div><div class="progress-label">3. Pronto</div></div>
   </div>
 
-  <!-- ─── ETAPA 1: DESTINO DOS DADOS ─── -->
-  <div class="step-label">
-    <div class="step-num">1</div>
-    <div class="step-title">Destino dos dados</div>
-  </div>
+  <div class="step-label"><div class="step-num">1</div><div class="step-title">Destino dos dados</div></div>
 
-  <!-- Google Drive -->
   <div class="card required" id="card-google">
     <div class="card-main">
-      <div class="card-icon">📊</div>
+      <div class="card-icon">&#128202;</div>
       <div class="card-body">
-        <div class="card-name">
-          Google Drive + Ads
-          <span class="badge badge-required">Obrigatório primeiro</span>
-        </div>
-        <div class="card-desc">Seus dados vão direto para o seu Drive. Também conecta Google Ads via mesmo login.</div>
+        <div class="card-name">Google Drive + Ads <span class="badge badge-required">Obrigatorio primeiro</span></div>
+        <div class="card-desc">Seus dados vao direto para o seu Drive. Tambem conecta Google Ads via mesmo login.</div>
         <div class="card-account" id="account-google"></div>
       </div>
       <div class="card-actions">
-        <span class="check-icon">✅</span>
-        <button class="btn-connect" id="btn-google" onclick="connect('google')">Conectar →</button>
+        <span class="check-icon">&#9989;</span>
+        <button class="btn-connect" id="btn-google" onclick="connect('google')">Conectar &rarr;</button>
         <button class="btn-disconnect" id="disc-google" style="display:none" onclick="disconnect('google')">Desconectar</button>
       </div>
     </div>
@@ -393,79 +108,75 @@ body{
 
   <div class="section-gap"></div>
 
-  <!-- ─── ETAPA 2: PLATAFORMAS DE ANÚNCIOS ─── -->
-  <!-- Meta Ads -->
+  <div class="step-label"><div class="step-num">2</div><div class="step-title">Plataformas de anuncios</div></div>
+
   <div class="card" id="card-meta">
     <div class="card-main">
-      <div class="card-icon">📘</div>
+      <div class="card-icon">&#128216;</div>
       <div class="card-body">
         <div class="card-name">Meta Ads</div>
         <div class="card-desc">Facebook + Instagram Ads &middot; Campanhas, gastos e ROAS</div>
         <div class="card-account" id="account-meta"></div>
       </div>
       <div class="card-actions">
-        <span class="check-icon">&#x2705;</span>
+        <span class="check-icon">&#9989;</span>
         <button class="btn-connect" id="btn-meta" onclick="connect('meta')" disabled>Conectar &rarr;</button>
         <button class="btn-disconnect" id="disc-meta" style="display:none" onclick="disconnect('meta')">Desconectar</button>
       </div>
     </div>
   </div>
 
-  <!-- Shopify -->
   <div class="card" id="card-shopify">
     <div class="card-main">
-      <div class="card-icon">&#x1F6CD;&#xFE0F;</div>
+      <div class="card-icon">&#128717;</div>
       <div class="card-body">
         <div class="card-name">Shopify</div>
         <div class="card-desc">Pedidos, receita e produtos da sua loja</div>
         <div class="card-account" id="account-shopify"></div>
       </div>
       <div class="card-actions">
-        <span class="check-icon">&#x2705;</span>
+        <span class="check-icon">&#9989;</span>
         <button class="btn-connect" id="btn-shopify" onclick="toggleShopify()" disabled>Conectar &rarr;</button>
         <button class="btn-disconnect" id="disc-shopify" style="display:none" onclick="disconnect('shopify')">Desconectar</button>
       </div>
     </div>
     <div class="shopify-expand" id="shopify-expand">
-      <label>Dominio da sua loja</label>
+      <label>Dominio da sua loja Shopify</label>
       <div class="shopify-row">
         <input type="text" id="shopify-domain" placeholder="minha-loja.myshopify.com" />
-        <button class="btn-connect" onclick="connectShopify()">Ir</button>
+        <button class="btn-connect" style="flex-shrink:0" onclick="connectShopify()">Ir &rarr;</button>
       </div>
     </div>
   </div>
 
-  <!-- TikTok (em breve) -->
   <div class="card soon">
     <div class="card-main">
-      <div class="card-icon">&#x1F3B5;</div>
+      <div class="card-icon">&#127925;</div>
       <div class="card-body">
         <div class="card-name">TikTok Ads <span class="badge badge-soon">Em breve</span></div>
         <div class="card-desc">Campanhas e performance no TikTok</div>
       </div>
-      <div class="card-actions"><span class="btn-label-soon">Em breve</span></div>
+      <div class="card-actions"><span class="soon-label">Em breve</span></div>
     </div>
   </div>
 
-  <!-- Hotmart (em breve) -->
   <div class="card soon">
     <div class="card-main">
-      <div class="card-icon">&#x1F525;</div>
+      <div class="card-icon">&#128293;</div>
       <div class="card-body">
         <div class="card-name">Hotmart <span class="badge badge-soon">Em breve</span></div>
         <div class="card-desc">Vendas, conversoes e produtos digitais</div>
       </div>
-      <div class="card-actions"><span class="btn-label-soon">Em breve</span></div>
+      <div class="card-actions"><span class="soon-label">Em breve</span></div>
     </div>
   </div>
 
-  <div class="footer-box" style="margin-top:32px">
-    <span class="footer-icon">&#x1F510;</span>
+  <div class="footer-box">
+    <span class="footer-icon">&#128272;</span>
     <div class="footer-text"><strong>Somente leitura.</strong> O OneAds nunca cria, pausa ou altera campanhas. Seus dados vao direto para o seu Google Drive.</div>
   </div>
 
   <p class="wa-link">Travou em algum passo? <a href="https://wa.me/5511985247274" target="_blank">Fale pelo WhatsApp</a></p>
-
 </div>
 
 <div class="toast" id="toast"></div>
@@ -473,6 +184,7 @@ body{
 <script>
 var BACKEND = '';
 var connectedPlatforms = new Set();
+var LABELS = {google:'Google Drive + Ads',meta:'Meta Ads',shopify:'Shopify',tiktok:'TikTok Ads',hotmart:'Hotmart'};
 
 function connect(platform) {
   window.location.href = BACKEND + '/auth/' + platform + '/connect';
@@ -492,21 +204,17 @@ function connectShopify() {
   window.location.href = BACKEND + '/auth/shopify/connect?shop=' + domain;
 }
 
-async function disconnect(platform) {
-  try {
-    await fetch(BACKEND + '/auth/' + platform + '/disconnect', { method: 'DELETE' });
-    setDisconnected(platform);
-    connectedPlatforms.delete(platform);
-    updateProgress();
-    updatePlatformLock();
-    showToast(platformLabel(platform) + ' desconectado.', 'info');
-  } catch(e) {
-    showToast('Erro ao desconectar.', 'info');
-  }
+function disconnect(platform) {
+  fetch(BACKEND + '/auth/' + platform + '/disconnect', {method:'DELETE'})
+    .then(function() {
+      setDisconnected(platform);
+      connectedPlatforms.delete(platform);
+      updateProgress();
+      updateLock();
+      showToast((LABELS[platform] || platform) + ' desconectado.', 'info');
+    })
+    .catch(function() { showToast('Erro ao desconectar.', 'info'); });
 }
-
-var PLATFORM_LABELS = { google:'Google Drive + Ads', meta:'Meta Ads', shopify:'Shopify', tiktok:'TikTok Ads', hotmart:'Hotmart' };
-function platformLabel(p) { return PLATFORM_LABELS[p] || p; }
 
 function setConnected(platform, accountName) {
   var card = document.getElementById('card-' + platform);
@@ -517,7 +225,7 @@ function setConnected(platform, accountName) {
   card.classList.add('connected'); card.classList.remove('required');
   if (btn)  btn.style.display = 'none';
   if (disc) disc.style.display = '';
-  if (acc && accountName) { acc.textContent = '&#10003; ' + accountName; acc.classList.add('show'); }
+  if (acc && accountName) { acc.textContent = '✓ ' + accountName; acc.classList.add('show'); }
   connectedPlatforms.add(platform);
 }
 
@@ -532,29 +240,28 @@ function setDisconnected(platform) {
   if (btn)  btn.style.display = '';
   if (disc) disc.style.display = 'none';
   if (acc)  { acc.textContent = ''; acc.classList.remove('show'); }
-  if (platform === 'shopify') { var exp = document.getElementById('shopify-expand'); if (exp) exp.style.display = 'none'; }
+  if (platform === 'shopify') { var e = document.getElementById('shopify-expand'); if(e) e.style.display='none'; }
 }
 
-function updatePlatformLock() {
-  var googleOk = connectedPlatforms.has('google');
+function updateLock() {
+  var ok = connectedPlatforms.has('google');
   ['meta','shopify'].forEach(function(p) {
     var btn = document.getElementById('btn-' + p);
     var card = document.getElementById('card-' + p);
-    if (btn)  btn.disabled = !googleOk;
-    if (card) card.style.opacity = googleOk ? '1' : '.55';
+    if (btn) btn.disabled = !ok;
+    if (card) card.style.opacity = ok ? '1' : '.55';
   });
 }
 
 function updateProgress() {
-  var googleOk = connectedPlatforms.has('google');
-  var hasAds   = connectedPlatforms.has('meta') || connectedPlatforms.has('shopify');
-  var allDone  = googleOk && hasAds;
-  setProgress('prog-step-1', googleOk ? 'done' : 'active');
-  setProgress('prog-step-2', allDone ? 'done' : (googleOk ? 'active' : ''));
-  setProgress('prog-step-3', allDone ? 'done' : '');
+  var g = connectedPlatforms.has('google');
+  var a = connectedPlatforms.has('meta') || connectedPlatforms.has('shopify');
+  setProg('prog-1', g ? 'done' : 'active');
+  setProg('prog-2', (g && a) ? 'done' : (g ? 'active' : ''));
+  setProg('prog-3', (g && a) ? 'done' : '');
 }
 
-function setProgress(id, state) {
+function setProg(id, state) {
   var el = document.getElementById(id);
   if (!el) return;
   el.classList.remove('done','active');
@@ -562,9 +269,8 @@ function setProgress(id, state) {
 }
 
 function showToast(msg, type) {
-  type = type || 'success';
   var t = document.getElementById('toast');
-  t.textContent = msg; t.className = 'toast ' + type;
+  t.textContent = msg; t.className = 'toast ' + (type||'success');
   void t.offsetWidth; t.classList.add('show');
   setTimeout(function(){ t.classList.remove('show'); }, 4000);
 }
@@ -573,295 +279,21 @@ var params = new URLSearchParams(window.location.search);
 var justConnected = params.get('connected');
 if (justConnected) history.replaceState({}, '', '/conectar');
 
-async function checkStatus() {
-  try {
-    var res  = await fetch(BACKEND + '/auth/status');
-    var data = await res.json();
-    for (var platform in data) {
+fetch(BACKEND + '/auth/status')
+  .then(function(r){ return r.json(); })
+  .then(function(data) {
+    Object.keys(data).forEach(function(platform) {
       if (data[platform].connected) setConnected(platform, data[platform].account_name || '');
-    }
-    updatePlatformLock();
+    });
+    updateLock();
     updateProgress();
     if (justConnected && connectedPlatforms.has(justConnected)) {
-      var label = platformLabel(justConnected);
-      var acc   = data[justConnected] && data[justConnected].account_name;
+      var label = LABELS[justConnected] || justConnected;
+      var acc = data[justConnected] && data[justConnected].account_name;
       showToast(label + (acc ? ' conectado como ' + acc : ' conectado!'), 'success');
     }
-  } catch(e) {
-    showToast('Aguardando servidor...', 'info');
-  }
-}
-
-checkStatus();
-</script>
-</body>
-</html>
- ' + acc : label + ' conectado!'), 'success');
-    }
-  } catch(e) {
-    showToast('Aguardando servidor... tente novamente em instantes.', 'info');
-  }
-}
-
-checkStatus();
-</script>
-</body>
-</html>
-  <div class="step-label">
-    <div class="step-num">2</div>
-    <div class="step-title">Plataformas de anúncios</div>
-  </div>
-
-  <!-- Meta Ads -->
-  <div class="card" id="card-meta">
-    <div class="card-main">
-      <div class="card-icon">📘</div>
-      <div class="card-body">
-        <div class="card-name">Meta Ads</div>
-        <div class="card-desc">Facebook + Instagram Ads · Campanhas, gastos e ROAS</div>
-        <div class="card-account" id="account-meta"></div>
-      </div>
-      <div class="card-actions">
-        <span class="check-icon">✅</span>
-        <button class="btn-connect" id="btn-meta" onclick="connect('meta')" disabled>Conectar →</button>
-        <button class="btn-disconnect" id="disc-meta" style="display:none" onclick="disconnect('meta')">Desconectar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Shopify -->
-  <div class="card" id="card-shopify">
-    <div class="card-main">
-      <div class="card-icon">🛍️</div>
-      <div class="card-body">
-        <div class="card-name">Shopify</div>
-        <div class="card-desc">Pedidos, receita e produtos da sua loja</div>
-        <div class="card-account" id="account-shopify"></div>
-      </div>
-      <div class="card-actions">
-        <span class="check-icon">✅</span>
-        <button class="btn-connect" id="btn-shopify" onclick="toggleShopify()" disabled>Conectar →</button>
-        <button class="btn-disconnect" id="disc-shopify" style="display:none" onclick="disconnect('shopify')">Desconectar</button>
-      </div>
-    </div>
-    <!-- Shopify domain expand -->
-    <div class="shopify-expand" id="shopify-expand">
-      <label>Domínio da sua loja</label>
-      <div class="shopify-row">
-        <input type="text" id="shopify-domain" placeholder="minha-loja.myshopify.com" />
-        <button class="btn-connect" onclick="connectShopify()">Ir →</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- TikTok Ads (em breve) -->
-  <div class="card soon" id="card-tiktok">
-    <div class="card-main">
-      <div class="card-icon">🎵</div>
-      <div class="card-body">
-        <div class="card-name">
-          TikTok Ads
-          <span class="badge badge-soon">Em breve</span>
-        </div>
-        <div class="card-desc">Campanhas e performance no TikTok</div>
-      </div>
-      <div class="card-actions">
-        <span class="btn-label-soon">Em breve</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Hotmart (em breve) -->
-  <div class="card soon" id="card-hotmart">
-    <div class="card-main">
-      <div class="card-icon">🔥</div>
-      <div class="card-body">
-        <div class="card-name">
-          Hotmart
-          <span class="badge badge-soon">Em breve</span>
-        </div>
-        <div class="card-desc">Vendas, conversões e produtos digitais</div>
-      </div>
-      <div class="card-actions">
-        <span class="btn-label-soon">Em breve</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ─── Footer ─── -->
-  <div class="footer-box">
-    <span class="footer-icon">🔐</span>
-    <div class="footer-text">
-      <strong>Somente leitura.</strong> O OneAds nunca cria, pausa ou altera campanhas. Todos os dados vão direto para o seu Google Drive — nenhuma senha fica em nossos servidores.
-    </div>
-  </div>
-
-  <p class="wa-link">Travou em algum passo? <a href="https://wa.me/5511985247274" target="_blank">Fale pelo WhatsApp →</a></p>
-
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-// URL base relativa — funciona local e em produção sem alterar código
-const BACKEND = '';
-
-// ─── Estado ───────────────────────────────────────
-const connectedPlatforms = new Set();
-
-// ─── Conectar ─────────────────────────────────────
-function connect(platform) {
-  window.location.href = `${BACKEND}/auth/${platform}/connect`;
-}
-
-function toggleShopify() {
-  const exp = document.getElementById('shopify-expand');
-  const open = exp.style.display === 'block';
-  exp.style.display = open ? 'none' : 'block';
-  if (!open) document.getElementById('shopify-domain').focus();
-}
-
-function connectShopify() {
-  let domain = document.getElementById('shopify-domain').value.trim();
-  if (!domain) { showToast('Digite o domínio da loja.', 'info'); return; }
-  if (!domain.includes('.myshopify.com')) domain += '.myshopify.com';
-  window.location.href = `${BACKEND}/auth/shopify/connect?shop=${domain}`;
-}
-
-// ─── Desconectar ──────────────────────────────────
-async function disconnect(platform) {
-  try {
-    await fetch(`${BACKEND}/auth/${platform}/disconnect`, { method: 'DELETE' });
-    setDisconnected(platform);
-    connectedPlatforms.delete(platform);
-    updateProgress();
-    updatePlatformLock();
-    showToast(`${platformLabel(platform)} desconectado.`, 'info');
-  } catch(e) {
-    showToast('Erro ao desconectar. Tente novamente.', 'info');
-  }
-}
-
-// ─── UI helpers ───────────────────────────────────
-const PLATFORM_LABELS = {
-  google: 'Google Drive + Ads',
-  meta: 'Meta Ads',
-  shopify: 'Shopify',
-  tiktok: 'TikTok Ads',
-  hotmart: 'Hotmart',
-};
-function platformLabel(p) { return PLATFORM_LABELS[p] || p; }
-
-function setConnected(platform, accountName) {
-  const card = document.getElementById(`card-${platform}`);
-  const btn  = document.getElementById(`btn-${platform}`);
-  const disc = document.getElementById(`disc-${platform}`);
-  const acc  = document.getElementById(`account-${platform}`);
-  if (!card) return;
-  card.classList.add('connected');
-  card.classList.remove('required');
-  if (btn)  { btn.style.display = 'none'; }
-  if (disc) { disc.style.display = 'inline-flex'; }
-  if (acc && accountName) {
-    acc.textContent = '✓ ' + accountName;
-    acc.classList.add('show');
-  }
-  connectedPlatforms.add(platform);
-}
-
-function setDisconnected(platform) {
-  const card = document.getElementById(`card-${platform}`);
-  const btn  = document.getElementById(`btn-${platform}`);
-  const disc = document.getElementById(`disc-${platform}`);
-  const acc  = document.getElementById(`account-${platform}`);
-  if (!card) return;
-  card.classList.remove('connected');
-  if (platform === 'google') card.classList.add('required');
-  if (btn)  { btn.style.display = ''; }
-  if (disc) { disc.style.display = 'none'; }
-  if (acc)  { acc.textContent = ''; acc.classList.remove('show'); }
-  // Fechar form shopify
-  if (platform === 'shopify') {
-    const exp = document.getElementById('shopify-expand');
-    if (exp) exp.style.display = 'none';
-  }
-}
-
-function updatePlatformLock() {
-  // Libera botões das plataformas se Google está conectado
-  const googleOk = connectedPlatforms.has('google');
-  ['meta','shopify'].forEach(p => {
-    const btn = document.getElementById(`btn-${p}`);
-    if (btn) btn.disabled = !googleOk;
-    const card = document.getElementById(`card-${p}`);
-    if (card) card.style.opacity = googleOk ? '1' : '.55';
-  });
-}
-
-function updateProgress() {
-  const googleOk = connectedPlatforms.has('google');
-  const hasAds   = connectedPlatforms.has('meta') || connectedPlatforms.has('shopify');
-  const allDone  = googleOk && hasAds;
-
-  setProgress('prog-step-1', googleOk ? 'done' : 'active');
-  setProgress('prog-step-2', allDone ? 'done' : (googleOk ? 'active' : ''));
-  setProgress('prog-step-3', allDone ? 'done' : '');
-}
-
-function setProgress(id, state) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.classList.remove('done','active');
-  if (state) el.classList.add(state);
-}
-
-// ─── Toast ────────────────────────────────────────
-function showToast(msg, type = 'success') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = `toast ${type}`;
-  void t.offsetWidth; // reflow
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 4000);
-}
-
-// ─── Parâmetro ?connected= ────────────────────────
-const params = new URLSearchParams(window.location.search);
-const justConnected = params.get('connected');
-if (justConnected) {
-  history.replaceState({}, '', '/conectar');
-}
-
-// ─── Verifica status ao carregar ──────────────────
-async function checkStatus() {
-  try {
-    const res  = await fetch(`${BACKEND}/auth/status`);
-    const data = await res.json();
-
-    for (const [platform, info] of Object.entries(data)) {
-      if (info.connected) {
-        const name = info.account_name || '';
-        setConnected(platform, name);
-      }
-    }
-
-    updatePlatformLock();
-    updateProgress();
-
-    // Toast de sucesso para a conexão que acabou de ocorrer
-    if (justConnected && connectedPlatforms.has(justConnected)) {
-      const label = platformLabel(justConnected);
-      const acc   = data[justConnected]?.account_name;
-      showToast(`✅ ${label} conectado${acc ? ' como ' + acc : ''}!`, 'success');
-    }
-
-  } catch(e) {
-    // Backend offline ou cold start do Render — avisa
-    showToast('Aguardando servidor... tente novamente em alguns segundos.', 'info');
-  }
-}
-
-checkStatus();
+  })
+  .catch(function() { showToast('Aguardando servidor...', 'info'); });
 </script>
 </body>
 </html>
