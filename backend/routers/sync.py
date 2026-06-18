@@ -197,3 +197,22 @@ async def sync_shopify(start_date: Optional[str] = None, end_date: Optional[str]
 
     return {"success": True, "rows_synced": len(rows), "drive_file_url": file_info["url"]}
 
+
+# ──────────────────────────────────────────────
+# RUN NOW — dispara o sync completo manualmente
+# ──────────────────────────────────────────────
+@router.post("/run-now")
+async def run_now():
+    """
+    Dispara o sync diário imediatamente (para testes e uso manual).
+    Equivale ao job das 08:30 BRT, mas roda na hora que for chamado.
+    """
+    import datetime as dt
+    from services.scheduler import daily_sync_job
+    results = await daily_sync_job()
+    return {
+        "success": True,
+        "triggered_at": dt.datetime.now().isoformat(),
+        "results": results,
+    }
+
