@@ -3,211 +3,864 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>OneAds — Conectar suas contas</title>
+<title>OneAds — Conectar Plataformas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#060910;
-  --surface:#0f1522;
-  --surface2:#141c2e;
+  --surface:#0d1420;
+  --surface2:#111827;
   --border:#1a2438;
-  --border2:#243350;
+  --border2:#1f2d47;
   --accent:#7c6df5;
-  --accent2:#06d6a0;
+  --accent-glow:rgba(124,109,245,.15);
+  --green:#06d6a0;
+  --green-glow:rgba(6,214,160,.12);
+  --red:#ff6b6b;
   --text:#eef0f8;
   --text2:#8892b0;
   --text3:#4a5568;
-  --radius:16px;
-  --radius-sm:10px;
+  --radius:18px;
+  --radius-sm:12px;
 }
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;line-height:1.6}
-.logo{font-size:1.5rem;font-weight:900;margin-bottom:8px}
-.logo span{color:var(--accent2)}
-.subtitle{font-size:.9rem;color:var(--text2);margin-bottom:48px;text-align:center}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  padding:40px 20px 80px;
+  line-height:1.6;
+}
 
-.connect-box{width:100%;max-width:520px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:40px}
-.connect-box h2{font-size:1.3rem;font-weight:800;margin-bottom:8px}
-.connect-box p{font-size:.88rem;color:var(--text2);margin-bottom:32px;line-height:1.7}
+/* ── Header ── */
+.header{
+  text-align:center;
+  margin-bottom:56px;
+}
+.logo{
+  font-size:1.6rem;
+  font-weight:900;
+  letter-spacing:-0.5px;
+  margin-bottom:6px;
+}
+.logo span{color:var(--green)}
+.header-sub{
+  font-size:.9rem;
+  color:var(--text2);
+}
 
-.platform-btn{width:100%;display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--border);cursor:pointer;transition:all .2s;margin-bottom:12px;text-align:left}
-.platform-btn:hover{border-color:var(--accent2);transform:translateX(4px)}
-.platform-btn.connected{border-color:var(--accent2);background:rgba(6,214,160,.06)}
-.platform-btn.connected .pb-status{color:var(--accent2)}
-.pb-icon{font-size:1.6rem;flex-shrink:0}
-.pb-info{flex:1}
-.pb-name{font-size:.95rem;font-weight:700}
-.pb-desc{font-size:.78rem;color:var(--text2);margin-top:2px}
-.pb-status{font-size:.78rem;font-weight:600;color:var(--text3);flex-shrink:0}
+/* ── Layout ── */
+.container{
+  max-width:580px;
+  margin:0 auto;
+}
 
-/* Google Drive destaque */
-.platform-btn.priority{border-color:rgba(124,109,245,.4);background:rgba(124,109,245,.05)}
-.platform-btn.priority:hover{border-color:var(--accent)}
+/* ── Step label ── */
+.step-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+}
+.step-num{
+  width:26px;height:26px;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  font-size:.75rem;
+  font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.step-title{
+  font-size:.8rem;
+  font-weight:700;
+  color:var(--text2);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
 
-.note{font-size:.78rem;color:var(--text3);text-align:center;margin-top:24px;line-height:1.7}
-.note a{color:var(--accent2);text-decoration:underline}
+/* ── Card ── */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:var(--radius);
+  padding:20px;
+  margin-bottom:10px;
+  transition:border-color .2s,background .2s;
+}
+.card.required{
+  border-color:rgba(124,109,245,.35);
+  background:rgba(124,109,245,.04);
+}
+.card.connected{
+  border-color:rgba(6,214,160,.4);
+  background:var(--green-glow);
+}
+.card.soon{
+  opacity:.5;
+  pointer-events:none;
+}
 
-.shopify-form{display:none;margin-top:-4px;margin-bottom:12px;padding:14px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm)}
-.shopify-form label{font-size:.78rem;color:var(--text2);display:block;margin-bottom:6px;font-weight:600}
-.shopify-form input{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:9px 12px;color:var(--text);font-size:.88rem;font-family:inherit;outline:none}
-.shopify-form input:focus{border-color:var(--accent2)}
-.shopify-form button{margin-top:10px;width:100%;padding:10px;background:linear-gradient(135deg,var(--accent),#5b4fdc);color:#fff;border:none;border-radius:6px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:inherit}
-.shopify-form button:hover{opacity:.9}
+/* ── Card inner ── */
+.card-main{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.card-icon{
+  font-size:2rem;
+  flex-shrink:0;
+  width:48px;
+  text-align:center;
+}
+.card-body{
+  flex:1;
+  min-width:0;
+}
+.card-name{
+  font-size:1rem;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.badge{
+  font-size:.65rem;
+  font-weight:700;
+  padding:3px 8px;
+  border-radius:20px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.badge-required{background:rgba(124,109,245,.2);color:var(--accent)}
+.badge-soon{background:rgba(255,255,255,.07);color:var(--text3)}
+.card-desc{
+  font-size:.8rem;
+  color:var(--text2);
+  margin-top:3px;
+}
+.card-account{
+  font-size:.8rem;
+  color:var(--green);
+  font-weight:600;
+  margin-top:3px;
+  display:none;
+}
+.card-account.show{display:block}
 
-.divider{height:1px;background:var(--border);margin:20px 0}
+/* ── Buttons ── */
+.card-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-shrink:0;
+}
+.btn-connect{
+  padding:9px 20px;
+  background:linear-gradient(135deg,var(--accent),#5b4fdc);
+  color:#fff;
+  border:none;
+  border-radius:var(--radius-sm);
+  font-size:.82rem;
+  font-weight:700;
+  cursor:pointer;
+  font-family:inherit;
+  transition:opacity .2s,transform .1s;
+  white-space:nowrap;
+}
+.btn-connect:hover{opacity:.85;transform:translateY(-1px)}
+.btn-connect:active{transform:translateY(0)}
+.btn-connect:disabled{opacity:.4;cursor:not-allowed;transform:none}
 
-.security-note{display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(6,214,160,.05);border:1px solid rgba(6,214,160,.15);border-radius:var(--radius-sm);font-size:.8rem;color:var(--text2);line-height:1.5}
-.security-icon{font-size:1.2rem;flex-shrink:0}
+.btn-disconnect{
+  padding:7px 14px;
+  background:transparent;
+  color:var(--text3);
+  border:1px solid var(--border2);
+  border-radius:var(--radius-sm);
+  font-size:.75rem;
+  font-weight:600;
+  cursor:pointer;
+  font-family:inherit;
+  transition:border-color .2s,color .2s;
+  white-space:nowrap;
+}
+.btn-disconnect:hover{border-color:var(--red);color:var(--red)}
 
-/* Toast */
-.toast{position:fixed;top:24px;right:24px;z-index:9999;background:var(--accent2);color:#060910;padding:14px 22px;border-radius:10px;font-weight:700;font-size:.9rem;box-shadow:0 8px 32px rgba(6,214,160,.4);opacity:0;transition:opacity .3s;pointer-events:none}
-.toast.show{opacity:1}
+.btn-label-soon{
+  font-size:.78rem;
+  color:var(--text3);
+  font-weight:600;
+}
+
+/* Checkmark */
+.check-icon{
+  font-size:1.3rem;
+  display:none;
+}
+.connected .check-icon{display:inline}
+
+/* ── Shopify domain form ── */
+.shopify-expand{
+  display:none;
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid var(--border);
+}
+.shopify-expand label{
+  font-size:.78rem;
+  color:var(--text2);
+  font-weight:600;
+  display:block;
+  margin-bottom:6px;
+}
+.shopify-row{
+  display:flex;
+  gap:8px;
+}
+.shopify-expand input{
+  flex:1;
+  background:var(--bg);
+  border:1px solid var(--border2);
+  border-radius:8px;
+  padding:9px 12px;
+  color:var(--text);
+  font-size:.85rem;
+  font-family:inherit;
+  outline:none;
+  transition:border-color .2s;
+}
+.shopify-expand input:focus{border-color:var(--accent)}
+.shopify-expand input::placeholder{color:var(--text3)}
+.shopify-expand .btn-connect{padding:9px 16px;font-size:.8rem}
+
+/* ── Divider ── */
+.section-gap{margin-bottom:40px}
+
+/* ── Footer ── */
+.footer-box{
+  margin-top:40px;
+  padding:18px 20px;
+  background:rgba(6,214,160,.05);
+  border:1px solid rgba(6,214,160,.15);
+  border-radius:var(--radius-sm);
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+}
+.footer-icon{font-size:1.2rem;flex-shrink:0;margin-top:2px}
+.footer-text{font-size:.8rem;color:var(--text2);line-height:1.7}
+.footer-text strong{color:var(--text)}
+
+.wa-link{
+  display:block;
+  text-align:center;
+  margin-top:24px;
+  font-size:.82rem;
+  color:var(--text3);
+}
+.wa-link a{color:var(--green);text-decoration:none;font-weight:600}
+.wa-link a:hover{text-decoration:underline}
+
+/* ── Progress bar ── */
+.progress-bar{
+  display:flex;
+  gap:8px;
+  margin-bottom:48px;
+}
+.progress-step{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.progress-track{
+  height:4px;
+  background:var(--border2);
+  border-radius:2px;
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),var(--green));
+  border-radius:2px;
+  width:0;
+  transition:width .5s ease;
+}
+.progress-label{
+  font-size:.7rem;
+  color:var(--text3);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.progress-step.active .progress-label{color:var(--text2)}
+.progress-step.done .progress-fill{width:100%}
+.progress-step.active .progress-fill{width:50%}
+
+/* ── Toast ── */
+.toast{
+  position:fixed;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%) translateY(20px);
+  z-index:9999;
+  padding:13px 24px;
+  border-radius:12px;
+  font-weight:700;
+  font-size:.88rem;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s,transform .3s;
+  white-space:nowrap;
+  max-width:90vw;
+}
+.toast.success{
+  background:var(--green);
+  color:#060910;
+  box-shadow:0 8px 32px rgba(6,214,160,.35);
+}
+.toast.info{
+  background:var(--surface2);
+  color:var(--text);
+  border:1px solid var(--border2);
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── Responsive ── */
+@media(max-width:480px){
+  .card-actions{flex-direction:column;align-items:stretch}
+  .btn-connect,.btn-disconnect{width:100%;text-align:center}
+  .shopify-row{flex-direction:column}
+}
 </style>
 </head>
 <body>
 
-<div class="logo">One<span>Ads</span></div>
-<p class="subtitle">Conecte suas plataformas de anúncios em minutos</p>
+<div class="header">
+  <div class="logo">One<span>Ads</span></div>
+  <p class="header-sub">Configure suas integrações em minutos</p>
+</div>
 
-<div class="connect-box">
-  <h2>Conectar suas contas</h2>
-  <p>Cada conexão usa OAuth — você autoriza diretamente na plataforma. Nenhuma senha é armazenada. Seus dados vão para o seu Google Drive.</p>
+<div class="container">
 
-  <!-- Google Drive (prioritário) -->
-  <div class="platform-btn priority" id="btn-google" onclick="connect('google')">
-    <span class="pb-icon">📊</span>
-    <div class="pb-info">
-      <div class="pb-name">Google Drive</div>
-      <div class="pb-desc">Necessário primeiro — é onde seus dados serão salvos</div>
+  <!-- Progress -->
+  <div class="progress-bar">
+    <div class="progress-step" id="prog-step-1">
+      <div class="progress-track"><div class="progress-fill"></div></div>
+      <div class="progress-label">1. Destino</div>
     </div>
-    <span class="pb-status" id="status-google">Conectar →</span>
+    <div class="progress-step" id="prog-step-2">
+      <div class="progress-track"><div class="progress-fill"></div></div>
+      <div class="progress-label">2. Plataformas</div>
+    </div>
+    <div class="progress-step" id="prog-step-3">
+      <div class="progress-track"><div class="progress-fill"></div></div>
+      <div class="progress-label">3. Pronto</div>
+    </div>
   </div>
 
+  <!-- ─── ETAPA 1: DESTINO DOS DADOS ─── -->
+  <div class="step-label">
+    <div class="step-num">1</div>
+    <div class="step-title">Destino dos dados</div>
+  </div>
+
+  <!-- Google Drive -->
+  <div class="card required" id="card-google">
+    <div class="card-main">
+      <div class="card-icon">📊</div>
+      <div class="card-body">
+        <div class="card-name">
+          Google Drive + Ads
+          <span class="badge badge-required">Obrigatório primeiro</span>
+        </div>
+        <div class="card-desc">Seus dados vão direto para o seu Drive. Também conecta Google Ads via mesmo login.</div>
+        <div class="card-account" id="account-google"></div>
+      </div>
+      <div class="card-actions">
+        <span class="check-icon">✅</span>
+        <button class="btn-connect" id="btn-google" onclick="connect('google')">Conectar →</button>
+        <button class="btn-disconnect" id="disc-google" style="display:none" onclick="disconnect('google')">Desconectar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+
+  <!-- ─── ETAPA 2: PLATAFORMAS DE ANÚNCIOS ─── -->
   <!-- Meta Ads -->
-  <div class="platform-btn" id="btn-meta" onclick="connect('meta')">
-    <span class="pb-icon">📘</span>
-    <div class="pb-info">
-      <div class="pb-name">Meta Ads</div>
-      <div class="pb-desc">Facebook + Instagram Ads · Campanhas e ROAS</div>
+  <div class="card" id="card-meta">
+    <div class="card-main">
+      <div class="card-icon">📘</div>
+      <div class="card-body">
+        <div class="card-name">Meta Ads</div>
+        <div class="card-desc">Facebook + Instagram Ads &middot; Campanhas, gastos e ROAS</div>
+        <div class="card-account" id="account-meta"></div>
+      </div>
+      <div class="card-actions">
+        <span class="check-icon">&#x2705;</span>
+        <button class="btn-connect" id="btn-meta" onclick="connect('meta')" disabled>Conectar &rarr;</button>
+        <button class="btn-disconnect" id="disc-meta" style="display:none" onclick="disconnect('meta')">Desconectar</button>
+      </div>
     </div>
-    <span class="pb-status" id="status-meta">Conectar →</span>
-  </div>
-
-  <!-- Google Ads -->
-  <div class="platform-btn" id="btn-google-ads" onclick="connect('google-ads')">
-    <span class="pb-icon">🔵</span>
-    <div class="pb-info">
-      <div class="pb-name">Google Ads</div>
-      <div class="pb-desc">Usa o mesmo login do Google Drive</div>
-    </div>
-    <span class="pb-status" id="status-google-ads">Conectar →</span>
-  </div>
-
-  <!-- Hotmart -->
-  <div class="platform-btn" id="btn-hotmart" onclick="connect('hotmart')">
-    <span class="pb-icon">🔥</span>
-    <div class="pb-info">
-      <div class="pb-name">Hotmart</div>
-      <div class="pb-desc">Vendas, conversões e produtos digitais</div>
-    </div>
-    <span class="pb-status" id="status-hotmart">Conectar →</span>
   </div>
 
   <!-- Shopify -->
-  <div class="platform-btn" id="btn-shopify" onclick="toggleShopifyForm()">
-    <span class="pb-icon">🛍️</span>
-    <div class="pb-info">
-      <div class="pb-name">Shopify</div>
-      <div class="pb-desc">Pedidos e receita da sua loja</div>
+  <div class="card" id="card-shopify">
+    <div class="card-main">
+      <div class="card-icon">&#x1F6CD;&#xFE0F;</div>
+      <div class="card-body">
+        <div class="card-name">Shopify</div>
+        <div class="card-desc">Pedidos, receita e produtos da sua loja</div>
+        <div class="card-account" id="account-shopify"></div>
+      </div>
+      <div class="card-actions">
+        <span class="check-icon">&#x2705;</span>
+        <button class="btn-connect" id="btn-shopify" onclick="toggleShopify()" disabled>Conectar &rarr;</button>
+        <button class="btn-disconnect" id="disc-shopify" style="display:none" onclick="disconnect('shopify')">Desconectar</button>
+      </div>
     </div>
-    <span class="pb-status" id="status-shopify">Conectar →</span>
-  </div>
-  <div class="shopify-form" id="shopify-form">
-    <label>Domínio da sua loja Shopify</label>
-    <input type="text" id="shopify-domain" placeholder="minha-loja.myshopify.com" />
-    <button onclick="connectShopify()">Conectar Shopify →</button>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="security-note">
-    <span class="security-icon">🔐</span>
-    <span>Todos os acessos são <strong>somente leitura</strong>. Seus dados vão direto para o seu Google Drive — nenhuma credencial fica armazenada em nossos servidores.</span>
+    <div class="shopify-expand" id="shopify-expand">
+      <label>Dominio da sua loja</label>
+      <div class="shopify-row">
+        <input type="text" id="shopify-domain" placeholder="minha-loja.myshopify.com" />
+        <button class="btn-connect" onclick="connectShopify()">Ir</button>
+      </div>
+    </div>
   </div>
 
-  <p class="note" style="margin-top:20px">Dúvidas? Fale pelo <a href="https://wa.me/5511985247274" target="_blank">WhatsApp (11) 98524-7274</a></p>
+  <!-- TikTok (em breve) -->
+  <div class="card soon">
+    <div class="card-main">
+      <div class="card-icon">&#x1F3B5;</div>
+      <div class="card-body">
+        <div class="card-name">TikTok Ads <span class="badge badge-soon">Em breve</span></div>
+        <div class="card-desc">Campanhas e performance no TikTok</div>
+      </div>
+      <div class="card-actions"><span class="btn-label-soon">Em breve</span></div>
+    </div>
+  </div>
+
+  <!-- Hotmart (em breve) -->
+  <div class="card soon">
+    <div class="card-main">
+      <div class="card-icon">&#x1F525;</div>
+      <div class="card-body">
+        <div class="card-name">Hotmart <span class="badge badge-soon">Em breve</span></div>
+        <div class="card-desc">Vendas, conversoes e produtos digitais</div>
+      </div>
+      <div class="card-actions"><span class="btn-label-soon">Em breve</span></div>
+    </div>
+  </div>
+
+  <div class="footer-box" style="margin-top:32px">
+    <span class="footer-icon">&#x1F510;</span>
+    <div class="footer-text"><strong>Somente leitura.</strong> O OneAds nunca cria, pausa ou altera campanhas. Seus dados vao direto para o seu Google Drive.</div>
+  </div>
+
+  <p class="wa-link">Travou em algum passo? <a href="https://wa.me/5511985247274" target="_blank">Fale pelo WhatsApp</a></p>
+
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const BACKEND = 'http://localhost:8000';
-
-const platformNames = {
-  google: 'Google Drive',
-  meta: 'Meta Ads',
-  hotmart: 'Hotmart',
-  shopify: 'Shopify',
-  tiktok: 'TikTok Ads',
-};
+var BACKEND = '';
+var connectedPlatforms = new Set();
 
 function connect(platform) {
-  if (platform === 'google-ads') {
-    showToast('Google Ads usa o login do Google Drive. Conecte o Google Drive primeiro.');
-    return;
-  }
-  window.location.href = `${BACKEND}/auth/${platform}/connect`;
+  window.location.href = BACKEND + '/auth/' + platform + '/connect';
 }
 
-function toggleShopifyForm() {
-  const form = document.getElementById('shopify-form');
-  form.style.display = form.style.display === 'block' ? 'none' : 'block';
-  if (form.style.display === 'block') document.getElementById('shopify-domain').focus();
+function toggleShopify() {
+  var exp = document.getElementById('shopify-expand');
+  var open = exp.style.display === 'block';
+  exp.style.display = open ? 'none' : 'block';
+  if (!open) document.getElementById('shopify-domain').focus();
 }
 
 function connectShopify() {
-  const domain = document.getElementById('shopify-domain').value.trim();
-  if (!domain) { showToast('Digite o domínio da sua loja.'); return; }
-  const shop = domain.includes('.myshopify.com') ? domain : domain + '.myshopify.com';
-  window.location.href = `${BACKEND}/auth/shopify/connect?shop=${shop}`;
+  var domain = document.getElementById('shopify-domain').value.trim();
+  if (!domain) { showToast('Digite o dominio da loja.', 'info'); return; }
+  if (!domain.includes('.myshopify.com')) domain += '.myshopify.com';
+  window.location.href = BACKEND + '/auth/shopify/connect?shop=' + domain;
 }
 
-function showToast(msg) {
+async function disconnect(platform) {
+  try {
+    await fetch(BACKEND + '/auth/' + platform + '/disconnect', { method: 'DELETE' });
+    setDisconnected(platform);
+    connectedPlatforms.delete(platform);
+    updateProgress();
+    updatePlatformLock();
+    showToast(platformLabel(platform) + ' desconectado.', 'info');
+  } catch(e) {
+    showToast('Erro ao desconectar.', 'info');
+  }
+}
+
+var PLATFORM_LABELS = { google:'Google Drive + Ads', meta:'Meta Ads', shopify:'Shopify', tiktok:'TikTok Ads', hotmart:'Hotmart' };
+function platformLabel(p) { return PLATFORM_LABELS[p] || p; }
+
+function setConnected(platform, accountName) {
+  var card = document.getElementById('card-' + platform);
+  var btn  = document.getElementById('btn-' + platform);
+  var disc = document.getElementById('disc-' + platform);
+  var acc  = document.getElementById('account-' + platform);
+  if (!card) return;
+  card.classList.add('connected'); card.classList.remove('required');
+  if (btn)  btn.style.display = 'none';
+  if (disc) disc.style.display = '';
+  if (acc && accountName) { acc.textContent = '&#10003; ' + accountName; acc.classList.add('show'); }
+  connectedPlatforms.add(platform);
+}
+
+function setDisconnected(platform) {
+  var card = document.getElementById('card-' + platform);
+  var btn  = document.getElementById('btn-' + platform);
+  var disc = document.getElementById('disc-' + platform);
+  var acc  = document.getElementById('account-' + platform);
+  if (!card) return;
+  card.classList.remove('connected');
+  if (platform === 'google') card.classList.add('required');
+  if (btn)  btn.style.display = '';
+  if (disc) disc.style.display = 'none';
+  if (acc)  { acc.textContent = ''; acc.classList.remove('show'); }
+  if (platform === 'shopify') { var exp = document.getElementById('shopify-expand'); if (exp) exp.style.display = 'none'; }
+}
+
+function updatePlatformLock() {
+  var googleOk = connectedPlatforms.has('google');
+  ['meta','shopify'].forEach(function(p) {
+    var btn = document.getElementById('btn-' + p);
+    var card = document.getElementById('card-' + p);
+    if (btn)  btn.disabled = !googleOk;
+    if (card) card.style.opacity = googleOk ? '1' : '.55';
+  });
+}
+
+function updateProgress() {
+  var googleOk = connectedPlatforms.has('google');
+  var hasAds   = connectedPlatforms.has('meta') || connectedPlatforms.has('shopify');
+  var allDone  = googleOk && hasAds;
+  setProgress('prog-step-1', googleOk ? 'done' : 'active');
+  setProgress('prog-step-2', allDone ? 'done' : (googleOk ? 'active' : ''));
+  setProgress('prog-step-3', allDone ? 'done' : '');
+}
+
+function setProgress(id, state) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('done','active');
+  if (state) el.classList.add(state);
+}
+
+function showToast(msg, type) {
+  type = type || 'success';
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast ' + type;
+  void t.offsetWidth; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 4000);
+}
+
+var params = new URLSearchParams(window.location.search);
+var justConnected = params.get('connected');
+if (justConnected) history.replaceState({}, '', '/conectar');
+
+async function checkStatus() {
+  try {
+    var res  = await fetch(BACKEND + '/auth/status');
+    var data = await res.json();
+    for (var platform in data) {
+      if (data[platform].connected) setConnected(platform, data[platform].account_name || '');
+    }
+    updatePlatformLock();
+    updateProgress();
+    if (justConnected && connectedPlatforms.has(justConnected)) {
+      var label = platformLabel(justConnected);
+      var acc   = data[justConnected] && data[justConnected].account_name;
+      showToast(label + (acc ? ' conectado como ' + acc : ' conectado!'), 'success');
+    }
+  } catch(e) {
+    showToast('Aguardando servidor...', 'info');
+  }
+}
+
+checkStatus();
+</script>
+</body>
+</html>
+ ' + acc : label + ' conectado!'), 'success');
+    }
+  } catch(e) {
+    showToast('Aguardando servidor... tente novamente em instantes.', 'info');
+  }
+}
+
+checkStatus();
+</script>
+</body>
+</html>
+  <div class="step-label">
+    <div class="step-num">2</div>
+    <div class="step-title">Plataformas de anúncios</div>
+  </div>
+
+  <!-- Meta Ads -->
+  <div class="card" id="card-meta">
+    <div class="card-main">
+      <div class="card-icon">📘</div>
+      <div class="card-body">
+        <div class="card-name">Meta Ads</div>
+        <div class="card-desc">Facebook + Instagram Ads · Campanhas, gastos e ROAS</div>
+        <div class="card-account" id="account-meta"></div>
+      </div>
+      <div class="card-actions">
+        <span class="check-icon">✅</span>
+        <button class="btn-connect" id="btn-meta" onclick="connect('meta')" disabled>Conectar →</button>
+        <button class="btn-disconnect" id="disc-meta" style="display:none" onclick="disconnect('meta')">Desconectar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopify -->
+  <div class="card" id="card-shopify">
+    <div class="card-main">
+      <div class="card-icon">🛍️</div>
+      <div class="card-body">
+        <div class="card-name">Shopify</div>
+        <div class="card-desc">Pedidos, receita e produtos da sua loja</div>
+        <div class="card-account" id="account-shopify"></div>
+      </div>
+      <div class="card-actions">
+        <span class="check-icon">✅</span>
+        <button class="btn-connect" id="btn-shopify" onclick="toggleShopify()" disabled>Conectar →</button>
+        <button class="btn-disconnect" id="disc-shopify" style="display:none" onclick="disconnect('shopify')">Desconectar</button>
+      </div>
+    </div>
+    <!-- Shopify domain expand -->
+    <div class="shopify-expand" id="shopify-expand">
+      <label>Domínio da sua loja</label>
+      <div class="shopify-row">
+        <input type="text" id="shopify-domain" placeholder="minha-loja.myshopify.com" />
+        <button class="btn-connect" onclick="connectShopify()">Ir →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TikTok Ads (em breve) -->
+  <div class="card soon" id="card-tiktok">
+    <div class="card-main">
+      <div class="card-icon">🎵</div>
+      <div class="card-body">
+        <div class="card-name">
+          TikTok Ads
+          <span class="badge badge-soon">Em breve</span>
+        </div>
+        <div class="card-desc">Campanhas e performance no TikTok</div>
+      </div>
+      <div class="card-actions">
+        <span class="btn-label-soon">Em breve</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hotmart (em breve) -->
+  <div class="card soon" id="card-hotmart">
+    <div class="card-main">
+      <div class="card-icon">🔥</div>
+      <div class="card-body">
+        <div class="card-name">
+          Hotmart
+          <span class="badge badge-soon">Em breve</span>
+        </div>
+        <div class="card-desc">Vendas, conversões e produtos digitais</div>
+      </div>
+      <div class="card-actions">
+        <span class="btn-label-soon">Em breve</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <div class="footer-box">
+    <span class="footer-icon">🔐</span>
+    <div class="footer-text">
+      <strong>Somente leitura.</strong> O OneAds nunca cria, pausa ou altera campanhas. Todos os dados vão direto para o seu Google Drive — nenhuma senha fica em nossos servidores.
+    </div>
+  </div>
+
+  <p class="wa-link">Travou em algum passo? <a href="https://wa.me/5511985247274" target="_blank">Fale pelo WhatsApp →</a></p>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// URL base relativa — funciona local e em produção sem alterar código
+const BACKEND = '';
+
+// ─── Estado ───────────────────────────────────────
+const connectedPlatforms = new Set();
+
+// ─── Conectar ─────────────────────────────────────
+function connect(platform) {
+  window.location.href = `${BACKEND}/auth/${platform}/connect`;
+}
+
+function toggleShopify() {
+  const exp = document.getElementById('shopify-expand');
+  const open = exp.style.display === 'block';
+  exp.style.display = open ? 'none' : 'block';
+  if (!open) document.getElementById('shopify-domain').focus();
+}
+
+function connectShopify() {
+  let domain = document.getElementById('shopify-domain').value.trim();
+  if (!domain) { showToast('Digite o domínio da loja.', 'info'); return; }
+  if (!domain.includes('.myshopify.com')) domain += '.myshopify.com';
+  window.location.href = `${BACKEND}/auth/shopify/connect?shop=${domain}`;
+}
+
+// ─── Desconectar ──────────────────────────────────
+async function disconnect(platform) {
+  try {
+    await fetch(`${BACKEND}/auth/${platform}/disconnect`, { method: 'DELETE' });
+    setDisconnected(platform);
+    connectedPlatforms.delete(platform);
+    updateProgress();
+    updatePlatformLock();
+    showToast(`${platformLabel(platform)} desconectado.`, 'info');
+  } catch(e) {
+    showToast('Erro ao desconectar. Tente novamente.', 'info');
+  }
+}
+
+// ─── UI helpers ───────────────────────────────────
+const PLATFORM_LABELS = {
+  google: 'Google Drive + Ads',
+  meta: 'Meta Ads',
+  shopify: 'Shopify',
+  tiktok: 'TikTok Ads',
+  hotmart: 'Hotmart',
+};
+function platformLabel(p) { return PLATFORM_LABELS[p] || p; }
+
+function setConnected(platform, accountName) {
+  const card = document.getElementById(`card-${platform}`);
+  const btn  = document.getElementById(`btn-${platform}`);
+  const disc = document.getElementById(`disc-${platform}`);
+  const acc  = document.getElementById(`account-${platform}`);
+  if (!card) return;
+  card.classList.add('connected');
+  card.classList.remove('required');
+  if (btn)  { btn.style.display = 'none'; }
+  if (disc) { disc.style.display = 'inline-flex'; }
+  if (acc && accountName) {
+    acc.textContent = '✓ ' + accountName;
+    acc.classList.add('show');
+  }
+  connectedPlatforms.add(platform);
+}
+
+function setDisconnected(platform) {
+  const card = document.getElementById(`card-${platform}`);
+  const btn  = document.getElementById(`btn-${platform}`);
+  const disc = document.getElementById(`disc-${platform}`);
+  const acc  = document.getElementById(`account-${platform}`);
+  if (!card) return;
+  card.classList.remove('connected');
+  if (platform === 'google') card.classList.add('required');
+  if (btn)  { btn.style.display = ''; }
+  if (disc) { disc.style.display = 'none'; }
+  if (acc)  { acc.textContent = ''; acc.classList.remove('show'); }
+  // Fechar form shopify
+  if (platform === 'shopify') {
+    const exp = document.getElementById('shopify-expand');
+    if (exp) exp.style.display = 'none';
+  }
+}
+
+function updatePlatformLock() {
+  // Libera botões das plataformas se Google está conectado
+  const googleOk = connectedPlatforms.has('google');
+  ['meta','shopify'].forEach(p => {
+    const btn = document.getElementById(`btn-${p}`);
+    if (btn) btn.disabled = !googleOk;
+    const card = document.getElementById(`card-${p}`);
+    if (card) card.style.opacity = googleOk ? '1' : '.55';
+  });
+}
+
+function updateProgress() {
+  const googleOk = connectedPlatforms.has('google');
+  const hasAds   = connectedPlatforms.has('meta') || connectedPlatforms.has('shopify');
+  const allDone  = googleOk && hasAds;
+
+  setProgress('prog-step-1', googleOk ? 'done' : 'active');
+  setProgress('prog-step-2', allDone ? 'done' : (googleOk ? 'active' : ''));
+  setProgress('prog-step-3', allDone ? 'done' : '');
+}
+
+function setProgress(id, state) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('done','active');
+  if (state) el.classList.add(state);
+}
+
+// ─── Toast ────────────────────────────────────────
+function showToast(msg, type = 'success') {
   const t = document.getElementById('toast');
   t.textContent = msg;
+  t.className = `toast ${type}`;
+  void t.offsetWidth; // reflow
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 4000);
 }
 
-// Verifica parâmetro ?connected=
+// ─── Parâmetro ?connected= ────────────────────────
 const params = new URLSearchParams(window.location.search);
-const connected = params.get('connected');
-if (connected) {
-  const name = platformNames[connected] || connected;
-  showToast('✅ ' + name + ' conectado com sucesso!');
-  const btn = document.getElementById('btn-' + connected);
-  const status = document.getElementById('status-' + connected);
-  if (btn) { btn.classList.add('connected'); }
-  if (status) { status.textContent = '✅ Conectado'; }
+const justConnected = params.get('connected');
+if (justConnected) {
   history.replaceState({}, '', '/conectar');
 }
 
-// Verifica status das conexões ao carregar
+// ─── Verifica status ao carregar ──────────────────
 async function checkStatus() {
   try {
-    const res = await fetch(`${BACKEND}/auth/status`);
+    const res  = await fetch(`${BACKEND}/auth/status`);
     const data = await res.json();
+
     for (const [platform, info] of Object.entries(data)) {
       if (info.connected) {
-        const btn = document.getElementById('btn-' + platform);
-        const status = document.getElementById('status-' + platform);
-        if (btn) btn.classList.add('connected');
-        if (status) status.textContent = info.account_name ? '✅ ' + info.account_name : '✅ Conectado';
+        const name = info.account_name || '';
+        setConnected(platform, name);
       }
     }
-  } catch(e) {}
+
+    updatePlatformLock();
+    updateProgress();
+
+    // Toast de sucesso para a conexão que acabou de ocorrer
+    if (justConnected && connectedPlatforms.has(justConnected)) {
+      const label = platformLabel(justConnected);
+      const acc   = data[justConnected]?.account_name;
+      showToast(`✅ ${label} conectado${acc ? ' como ' + acc : ''}!`, 'success');
+    }
+
+  } catch(e) {
+    // Backend offline ou cold start do Render — avisa
+    showToast('Aguardando servidor... tente novamente em alguns segundos.', 'info');
+  }
 }
+
 checkStatus();
 </script>
 </body>

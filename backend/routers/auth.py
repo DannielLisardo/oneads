@@ -87,7 +87,7 @@ async def google_callback(code: str):
     except Exception:
         pass
 
-    return RedirectResponse("http://localhost:8000/conectar?connected=google")
+    return RedirectResponse(f"{settings.frontend_base_url}/conectar?connected=google")
 
 @router.delete("/google/disconnect")
 async def google_disconnect():
@@ -137,7 +137,7 @@ async def meta_callback(code: str):
     except Exception:
         pass
 
-    return RedirectResponse("http://localhost:8000/conectar?connected=meta")
+    return RedirectResponse(f"{settings.frontend_base_url}/conectar?connected=meta")
 
 @router.delete("/meta/disconnect")
 async def meta_disconnect():
@@ -177,7 +177,7 @@ async def tiktok_callback(auth_code: str):
         "advertiser_ids": data.get("advertiser_ids", []),
         "account_name": data.get("display_name", "TikTok"),
     })
-    return RedirectResponse("http://localhost:8000/conectar?connected=tiktok")
+    return RedirectResponse(f"{settings.frontend_base_url}/conectar?connected=tiktok")
 
 @router.delete("/tiktok/disconnect")
 async def tiktok_disconnect():
@@ -221,7 +221,7 @@ async def hotmart_callback(code: str):
         "refresh_token": token_data.get("refresh_token"),
         "account_name": "Hotmart",
     })
-    return RedirectResponse("http://localhost:8000/conectar?connected=hotmart")
+    return RedirectResponse(f"{settings.frontend_base_url}/conectar?connected=hotmart")
 
 @router.delete("/hotmart/disconnect")
 async def hotmart_disconnect():
@@ -266,7 +266,7 @@ async def shopify_callback(code: str, shop: str, state: str):
         "shop_domain": shop,
         "account_name": shop.replace(".myshopify.com", ""),
     })
-    return RedirectResponse("http://localhost:8000/conectar?connected=shopify")
+    return RedirectResponse(f"{settings.frontend_base_url}/conectar?connected=shopify")
 
 @router.delete("/shopify/disconnect")
 async def shopify_disconnect():

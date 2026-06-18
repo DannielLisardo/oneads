@@ -36,6 +36,9 @@ class Settings(BaseSettings):
     # Drive
     drive_root_folder_name: str = "OneAds Data"
 
+    # Frontend base URL (para redirects pós-OAuth)
+    frontend_base_url: str = "http://localhost:8000"
+
     class Config:
         env_file = ".env"
         case_sensitive = False
